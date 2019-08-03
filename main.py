@@ -91,6 +91,7 @@ def process_input(abacus, ret):
     if i == len(units):
       break
       '''
+  # Soft copy l[::-1]; Hard copy l.reverse()
   for j in range(len(units) - 1, - 1, - 1):
     for i in range(units[j]):
       print(units[j])
