@@ -77,26 +77,18 @@ def intro():
       continue
     return inp
 
-# TODO: Fix Bugs
 def process_input(abacus, ret):
   units = [int(d) for d in str(ret)]
+  units.reverse()
   if len(units) > 10:
     print("Number Too Large.")
     exit(-1)
   ''' Remove Trailing Zeros
   while units[-1] == 0:
     units.pop[-1] '''
-  '''
-  for i in range(len(abacus)):
-    if i == len(units):
-      break
-      '''
-  # Soft copy l[::-1]; Hard copy l.reverse()
   for j in range(len(units) - 1, - 1, - 1):
     for i in range(units[j]):
-      print(units[j])
       slide(abacus[j], 'd')
-  print(units)
 
 '''
 MAIN FUNCTION
