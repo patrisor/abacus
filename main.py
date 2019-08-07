@@ -1,52 +1,29 @@
+import os
 '''
 ABACUS
 '''
-''' TODO: Update
-========================================================
-||  .              .     .-.     .-.     .-.     .-.  ||
-||-( |------------| )---(   )---(   )---(   )---(   )-||
-||  "              "     "-"     "-"     "-"     "-"  ||
-||  .-.                  .-.     .-.     .-.     .-.  ||
-||-(   )----------------(   )---(   )---(   )---(   )-||
-||  "-"                  "-"     "-"     "-"     "-"  ||
-||  .-.     .              .     .-.     .-.     .-.  ||
-||-(   )---( |------------| )---(   )---(   )---(   )-||
-||  "-"     "              "     "-"     "-"     "-"  ||
-||  .-.     .-.                  .-.     .-.     .-.  ||
-||-(   )---(   )----------------(   )---(   )---(   )-||
-||  "-"     "-"                  "-"     "-"     "-"  ||
-||  .-.     .-.     .              .     .-.     .-.  ||
-||-(   )---(   )---( |------------| )---(   )---(   )-||
-||  "-"     "-"     "              "     "-"     "-"  ||
-||  .-.     .-.     .-.                  .-.     .-.  ||
-||-(   )---(   )---(   )----------------(   )---(   )-||
-||  "-"     "-"     "-"                  "-"     "-"  ||
-||  .-.     .-.     .-.     .              .     .-.  ||
-||-(   )---(   )---(   )---( |------------| )---(   )-||
-||  "-"     "-"     "-"     "              "     "-"  ||
-||  .-.     .-.     .-.     .-.                  .-.  ||
-||-(   )---(   )---(   )---(   )----------------(   )-||
-||  "-"     "-"     "-"     "-"                  "-"  ||
-||  .-.     .-.     .-.     .-.     .              .  ||
-||-(   )---(   )---(   )---(   )---( |------------| )-||
-||  "-"     "-"     "-"     "-"     "              "  ||
-||  .-.     .-.     .-.     .-.     .-.               ||
-||-(   )---(   )---(   )---(   )---(   )--------------||
-||  "-"     "-"     "-"     "-"     "-"               ||
-========================================================
- .-.
-(   ) = -----
- '-'
-||  .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.                    ||
-||-(   )-(   )-(   )-(   )-(   )-(   )-(   )-(   )-(   )-(   )-------------------||
-||  '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'                    ||
-'''
 def print_abacus(abacus):
-  for row in range(len(abacus)):
-    print(abacus[row])
+    x = ("=" * 83) + "\n"
+    for row in range(len(abacus)):
+        for i in range(3): # Construct Row of Abacus from left to right
+            x += '||'
+            for col in abacus[row]: # At each drawing, it scans over the list once again from left to right
+                if i == 0: # BUILDS the tops portion of the string
+                    x += ("      " if col == 0 else "  .-. ")
+                if i == 1: 
+                    x += ("------" if col == 0 else "-(   )")
+                if i == 2:
+                    x += ("      " if col == 0 else "  '-' ")
+            if row == len(abacus):
+                x += " || "
+                break
+            x += (" ||\n" if i == 0 or i == 2 else "-||\t" + str(row) + "\n")
+    x += ("=" * 83)
+    print(x)
 
 # Logic to slide any part of the abacus
 def slide(l, inp):
+    os.system("afplay sounds/click_sound.wav")
     if inp == "d":
         if l[0] == 0:
             return False
@@ -92,7 +69,7 @@ def update_abacus(abacus):
         print("Invalid Input. Try Again.")
         continue
       print_abacus(abacus)
-      print("NUMBER: " + '{:,}'.format(int(calculate_abacus(abacus))))
+      print("NUMBER: " + '{:,}'.format(int(calculate_abacus(abacus))) + "\n")
 
 def choose_row():
   while True:
